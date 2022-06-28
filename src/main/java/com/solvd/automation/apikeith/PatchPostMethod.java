@@ -9,7 +9,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 
-@Endpoint(url = "${base_url}/posts/1", methodType = HttpMethodType.PATCH)
+@Endpoint(url = "${base_url}/posts/101", methodType = HttpMethodType.PATCH)
 @RequestTemplatePath(path = "api/posts/_patch/rq.json")
 @ResponseTemplatePath(path = "api/posts/_patch/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.ACCEPTED_202)

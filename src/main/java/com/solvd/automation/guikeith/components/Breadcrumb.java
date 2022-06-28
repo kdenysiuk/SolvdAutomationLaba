@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class Breadcrumb extends AbstractUIObject {
 
-    @FindBy(xpath = "//a[@title = \"Return to Home\"]")
+    @FindBy(xpath = ".//a[@title = 'Return to Home']")
     private ExtendedWebElement homeButton;
 
     public Breadcrumb(WebDriver driver, SearchContext searchContext) {

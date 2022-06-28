@@ -11,33 +11,41 @@ import java.util.List;
 
 public class HomePage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@class=\"nav\"]")
+    @FindBy(xpath = "//*[@class='nav']")
     private NavigateMenu navigateMenu;
 
-    @FindBy(xpath = "//*[@name = \"search_query\"]")
+    @FindBy(xpath = "//*[@name = 'search_query']")
     private ExtendedWebElement searchField;
 
-    @FindBy(xpath = "//*[@name = \"submit_search\"]")
+    @FindBy(xpath = "//*[@name = 'submit_search']")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//*[@title = \"View my shopping cart\"]")
+    @FindBy(xpath = "//*[@title = 'View my shopping cart']")
     private ExtendedWebElement cartButton;
 
-    @FindBy(xpath = "//*[@id = \"homefeatured\"]//div[@class=\"product-container\"]")
+    @FindBy(xpath = "//*[@id = 'homefeatured']//div[@class='product-container']")
     private List<Product> popularProducts;
 
-    @FindBy(xpath = "//*[@id = \"blockbestsellers\"]//div[@class=\"product-container\"]")
+    @FindBy(xpath = "//*[@id = 'blockbestsellers']//div[@class='product-container']")
     private List<Product> bestSellerProducts;
 
     public HomePage(WebDriver driver) {
         super(driver);
-    }
-
-    public boolean isHomePagePresent(){
-        return searchButton.isElementPresent();
+        setPageURL("index.php");
     }
 
     public NavigateMenu getNavigateMenu() {
         return navigateMenu;
+    }
+
+    public ProductPage clickPopularProduct(String productString) {
+        for (Product product : popularProducts) {
+            String currentProduct = product.getProductTitle();
+            if (productString.equalsIgnoreCase(currentProduct)) {
+                product.clickProductTitle();
+                return new ProductPage(driver);
+            }
+        }
+        throw new RuntimeException(productString);
     }
 }
