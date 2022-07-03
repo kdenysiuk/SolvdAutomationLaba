@@ -25,7 +25,8 @@ public class ProductPopUp extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String getProductTitle(){
+    public String getProductTitle(String title){
+        productTitle.assertElementWithTextPresent(title,3);
         return productTitle.getText();
     }
 

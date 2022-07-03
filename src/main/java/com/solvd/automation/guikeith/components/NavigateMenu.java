@@ -32,7 +32,7 @@ public class NavigateMenu extends AbstractUIObject {
     }
 
     public boolean isItSignedIn(){
-        return accountUserButton.isElementPresent();
+        return accountUserButton.isElementPresent(3);
     }
 
     public ContactUsPage clickContactUsButton(){

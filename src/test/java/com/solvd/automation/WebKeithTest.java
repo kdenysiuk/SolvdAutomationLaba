@@ -1,6 +1,7 @@
 package com.solvd.automation;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.solvd.automation.guikeith.components.NavigateMenu;
 import com.solvd.automation.guikeith.components.ProductPopUp;
@@ -40,23 +41,22 @@ public class WebKeithTest implements IAbstractTest {
         Assert.assertTrue(navigateMenu.isItSignedIn(), "User not logged");
     }
 
-    @Test()
+    @Test(dataProvider = "DataProvider")
     @MethodOwner(owner = "Keith_Denysiuk")
-    public void testCheckProduct(){
+    @XlsDataSourceParameters(path = "xls/keithtest.xlsx", sheet = "WebTest", dsUid = "TUID", dsArgs = "title,description,price", testRailColumn = "title")
+    public void testCheckProduct(String title, String description, String price){
         new AuthService().login();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "The page is not opened");
-        ProductPage productPage = homePage.clickPopularProduct("Blouse");
+        ProductPage productPage = homePage.clickPopularProduct(title);
         Assert.assertTrue(productPage.isPageOpened(), "The page is not opened");
-        Assert.assertEquals(productPage.getProductTitle(), "Blouse", "Invalid title");
-        Assert.assertEquals(productPage.getProductDescription(), "Short sleeved blouse with feminine draped sleeve detail.", "Invalid description");
-        Assert.assertEquals(productPage.getProductPrice(), "$27.00", "Invalid title");
+        Assert.assertEquals(productPage.getProductTitle(), title, "Invalid title");
+        Assert.assertEquals(productPage.getProductDescription(), description, "Invalid description");
+        Assert.assertEquals(productPage.getProductPrice(), price, "Invalid title");
         ProductPopUp productPopUp = productPage.clickAddToCartButton();
-        //pause is needed, sometimes the assertion is executed before page opens
-        pause(2);
-        Assert.assertEquals(productPopUp.getProductTitle(), "Blouse", "Invalid title");
-        Assert.assertEquals(productPopUp.getProductPrice(), "$27.00", "Invalid title");
+        Assert.assertEquals(productPopUp.getProductTitle(title), title, "Invalid title");
+        Assert.assertEquals(productPopUp.getProductPrice(), price, "Invalid title");
         CartPage cartPage = productPopUp.clickProceedToCheckoutButton();
         Assert.assertTrue(cartPage.isPageOpened(), "The page is not opened");
         ConfirmAddressPage confirmAddressPage = cartPage.clickProceedToCheckoutButton();

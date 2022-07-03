@@ -12,7 +12,7 @@ import com.qaprosoft.carina.core.foundation.utils.Configuration;
 @Endpoint(url = "${base_url}/posts/101", methodType = HttpMethodType.PATCH)
 @RequestTemplatePath(path = "api/posts/_patch/rq.json")
 @ResponseTemplatePath(path = "api/posts/_patch/rs.json")
-@SuccessfulHttpStatus(status = HttpResponseStatusType.ACCEPTED_202)
+@SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class PatchPostMethod extends AbstractApiMethodV2 {
 
     public PatchPostMethod() {

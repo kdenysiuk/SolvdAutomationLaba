@@ -31,7 +31,8 @@ public class APIPostsTest implements IAbstractTest {
     @MethodOwner(owner = "Keith_Denysiuk")
     public void testPostAPost(){
         PostPostMethod postPostMethod = new PostPostMethod();
-        postPostMethod.callAPI();
+        postPostMethod.getProperties().remove("title");
+        postPostMethod.callAPIExpectSuccess();
         postPostMethod.validateResponse();
     }
 
@@ -58,10 +59,10 @@ public class APIPostsTest implements IAbstractTest {
     @MethodOwner(owner = "Keith_Denysiuk")
     public void testPatchAPost(){
         PostPostMethod postPostMethod = new PostPostMethod();
-        postPostMethod.callAPI();
+        postPostMethod.callAPIExpectSuccess();
         postPostMethod.validateResponse();
         PatchPostMethod patchPostMethod = new PatchPostMethod();
-        patchPostMethod.callAPI();
+        patchPostMethod.callAPIExpectSuccess();
         patchPostMethod.validateResponse();
     }
 }
